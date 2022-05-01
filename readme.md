@@ -53,6 +53,8 @@ int main()
 }
 
 ```
+### Result of the example
+![Outcome signal 1](./resources/sample1.png)
 
 ## Documentation
 

@@ -30,6 +30,7 @@ Filt<T>::Filt(const FilterCoefficients<T>& p_coefficients)
 template<typename T>
 T Filt<T>::CalculateOneStep(T p_input)
 {
+    //TODO check for overflow
     T output = m_FilterCoefficients.m_CoefficientsB.at(0) * p_input + m_Delay.at(0);
     for (size_t j = 1; j <  m_FilterCoefficients.m_CoefficientsA.size(); ++j) 
     {
@@ -60,6 +61,7 @@ std::vector<T>&& Filt<T>::Filter(const std::vector<T>& p_inputVector, const std:
   m_Delay = std::move(p_initialState);
   m_Delay.push_back(0);
 
+  //TODO Parallelize if possible
   for (size_t i = 0; i < p_inputVector.size(); ++i) 
   {
       m_Output.at(i) = CalculateOneStep(p_inputVector.at(i));
